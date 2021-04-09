@@ -14,12 +14,12 @@ from catboost import CatBoostClassifier
 
 
 def setup():
-  preprocessed_data=pd.read_csv('sample_data\sample_data.csv')
+  preprocessed_data=pd.read_csv('sample_data/sample_data.csv')
   preprocessed_data=preprocessed_data.drop(['reordered'],axis=1)
-  orders = pd.read_csv('sample_data\sample_orders.csv')
+  orders = pd.read_csv('sample_data/sample_orders.csv')
   temp=orders[['user_id']]  
   preprocessed_data=pd.merge(preprocessed_data,temp,on='user_id',how='inner')
-  train_data = pd.read_csv('sample_data\sample_order_products__train.csv')
+  train_data = pd.read_csv('sample_data/sample_order_products__train.csv')
   temp2=pd.merge(orders,train_data,on='order_id',how='inner')[['user_id','product_id','reordered']]
   preprocessed_data=pd.merge(preprocessed_data,temp2,on=['user_id','product_id'],how='left')
   for i in range(len(preprocessed_data)):
